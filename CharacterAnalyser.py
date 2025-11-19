@@ -1,16 +1,41 @@
 import sys
+# spaCy must be installed on device
+'''
+pip install -U pip setuptools wheel
+pip install -U spacy
+python -m spacy download en_core_web_sm
+'''
+import spacy
 
-def parseFile():
+nlp = spacy.load("en_core_web_sm")
+
+def parse_file():
     return 0
 
-def usageMsg():
+def check_for_names(paragraph):
+    '''
+        Using spaCy, an object containing tokens from paragaph will be created. From this object,
+        tokens will be checked for the label type "PERSON", singally that a name was found. Words
+        from this paragraph with the label "PERSON" are returned. If no words with the label
+        "PERSON" are found, then an empty list is returned.
+        Args:
+            Paragraph (String): A paragraph, as defined in the context of english grammar
+        Return:
+            List of names in paragraph
+    '''
+    # Object created using spaCy
+    doc = nlp(paragraph)
+    return [ent.text for ent in doc.ents if ent.label_ == "PERSON"]
+
+
+def usage_msg():
     '''
         Prints out a usefull usage message to the console before exiting the program
     '''
     print("Usage: python CharacterAnalyser.py <input_file.txt> <output_file.txt>")
     exit()
 
-def openFileSafely(fileName):
+def open_file_safely(fileName):
     '''
         Safely opens a given file to read. If the file exists, then the opened file is returned.
         If the file given does not exist, or cannot be found, then a usefull error message is
@@ -26,7 +51,7 @@ def openFileSafely(fileName):
         return open(fileName, 'r')
     except FileNotFoundError:
         print("File \"" + fileName + "\" was not found! Ensure it has the correct file path.")
-        usageMsg()
+        usage_msg()
 
 def main():
     '''
@@ -35,18 +60,18 @@ def main():
         calling for the file parsing to begin.
     '''
     # Check that the correct number of arguments were given to the program
-    if(len(sys.argv) > 2):
+    if(len(sys.argv) > 3):
         print("Too many arguments given!")
-        usageMsg()
-    elif(len(sys.argv) <= 1):
+        usage_msg()
+    elif(len(sys.argv) <= 2):
         print("Not enough arguments given!")
-        usageMsg()
+        usage_msg()
 
     # Store the input and output files before parsing
-    inputFile = openFileSafely(sys.argv[0])
-    outputFile = sys.argv[1]
+    inputFile = open_file_safely(sys.argv[1])
+    outputFile = sys.argv[2]
     # Call parsing to begin
-    parseFile()
+    parse_file()
 
 if __name__ == "__main__":
     main()

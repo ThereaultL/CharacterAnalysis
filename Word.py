@@ -11,7 +11,7 @@ class Word:
         # Word must exist once to be created
         self.frequency = 1
 
-    def getWord(self):
+    def get_word(self):
         '''
             Gets the word
             Returns:
@@ -19,7 +19,7 @@ class Word:
         '''
         return self.word
 
-    def getFrequency(self):
+    def get_frequency(self):
         '''
             Gets the frequency of the word
             Returns:
@@ -27,7 +27,7 @@ class Word:
         '''
         return self.frequency
 
-    def incrementFrequency(self):
+    def increment_frequency(self):
         '''
             Increments the frequency of the word by one
         '''
