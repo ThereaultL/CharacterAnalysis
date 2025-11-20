@@ -7,3 +7,5 @@ John spoke of his coworkers: Alice, Matt, and Cat.
 After he wrote about his work day, John wrote about his evening.
 
 "My roommate, William, and I went to the suppermarket since we ran out of eggs," John wrote.
+
+John finished writting his story before he went to bed, "I had a productive day!"
