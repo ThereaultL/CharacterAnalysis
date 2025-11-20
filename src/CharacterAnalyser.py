@@ -48,6 +48,7 @@ def parse_paragraph(characters, paragraph):
     quote_seperation = seperate_text(paragraph, "\"")
     quotes = quote_seperation[1::2]
     text = quote_seperation[::2]
+    # TODO create a list of articles and pronouns to not me counted as "most frequent words"
     if(quotes):
         name = find_character(text)
         for segment in quotes:
