@@ -28,10 +28,22 @@ def check_for_names(text):
 def store_name(characters, name):
     '''
         Stores the name of a character inside of the characters list
+        Args:
+            characters (list): list of characters
+            name (String): name of the character
     '''
     characters.add_character(name)
 
 def parse_paragraph(characters, paragraph):
+    '''
+        Seperates a paragraph based on where there is and isn't speach, given closed quotations.
+        If speech is found in a paragraph, then the character speaking is determined using 
+        find_character. Once the character speaking is found, the text enclosed in quotations is
+        added to list of words inside of the Character class using add_sentence from CharacterList
+        Args:
+            characters (list): list of characters
+            paragraph (String): a paragraph, as defined in the context of english grammar
+    '''
     # Splits paragraph by text between quotations
     quote_seperation = seperate_text(paragraph, "\"")
     quotes = quote_seperation[1::2]
@@ -43,6 +55,15 @@ def parse_paragraph(characters, paragraph):
             characters.add_sentence(name, sentence)
 
 def find_character(text_list):
+    '''
+        Given text within quotes, uses the check_for_names function to determine which character
+        is speaking. The character speaking is determined by the first apperance of a name withn 
+        the list of names in mentioned in a the text.
+        Args:
+            text_list (list): a list of strings representing words
+        Return:
+            Name of the character speaking
+    '''
     name = ""
     is_character = True
     for text in text_list:
@@ -59,6 +80,9 @@ def parse_characters(characters, paragraph):
     '''
         Parses the characters in a paragraph by checking for names. The names list is then 
         iterated, and each name present in the names list is added to the characters 
+        Args:
+            characters (list): list of characters
+            paragraph (String): a paragraph, as defined in the context of english grammar
     '''
     names = check_for_names(paragraph)
     for name in names:
@@ -67,6 +91,11 @@ def parse_characters(characters, paragraph):
 def seperate_text(text, regex):
     '''
         Splits a text based on paragraphs which are represented by the new line character
+        Args:
+            text (String): text to split based on regex
+            regex (String): expression to seperate the text by
+        Return:
+            A list containing tokens of the text split based on the regex
     '''
     return text.split(regex)
 
