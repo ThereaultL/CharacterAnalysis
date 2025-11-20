@@ -1,4 +1,5 @@
 import sys
+from CharacterList import CharacterList
 # spaCy must be installed on device
 '''
 pip install -U pip setuptools wheel
@@ -8,9 +9,6 @@ python -m spacy download en_core_web_sm
 import spacy
 
 nlp = spacy.load("en_core_web_sm")
-
-def parse_file():
-    return 0
 
 def check_for_names(paragraph):
     '''
@@ -27,6 +25,26 @@ def check_for_names(paragraph):
     doc = nlp(paragraph)
     return [ent.text for ent in doc.ents if ent.label_ == "PERSON"]
 
+def store_name(characters, name):
+    '''
+        Stores the name of a character inside of the characters list
+    '''
+    characters.add_character(name)
+
+def parse_characters(characters, paragraph):
+    '''
+        Parses the characters in a paragraph by checking for names. The names list is then 
+        iterated, and each name present in the names list is added to the characters 
+    '''
+    names = check_for_names(paragraph)
+    for name in names:
+        store_name(characters, name)
+
+def seperate_paragraphs(text):
+    '''
+        Splits a text based on paragraphs which are represented by the new line character
+    '''
+    return text.split("\n")
 
 def usage_msg():
     '''
@@ -34,6 +52,34 @@ def usage_msg():
     '''
     print("Usage: python CharacterAnalyser.py <input_file.txt> <output_file.txt>")
     exit()
+
+def parse_file(input_file, output_file):
+    '''
+        parse a text file by seperating the txt by paragraphs (represented by a new line char).
+        Method then iterates through each paragraph in text, parsing each character in a given
+        paragraph. After iterating through each paragraph, all characters are then written to
+        the output_file
+        Args:
+            input_file (file): file to read and parse
+            output_file (String): file name to write to
+    '''
+    text = input_file.read()
+    paragraphs = seperate_paragraphs(text)
+    characters = CharacterList()
+    for paragraph in paragraphs:
+        parse_characters(characters, paragraph)
+    write_to_file(output_file, characters)
+
+def write_to_file(output_file, characters):
+    '''
+        Opens the output_file (or creates new file if not already present) in write mode before
+        iterating through the characters inside of characters object. For each character, their
+        name and appearances in text and written on its own line inside of the output_file. 
+    '''
+    characters = characters.get_characters()
+    with open(output_file, "w") as f:
+        for character in characters:
+            f.write(character.get_name() + " : " + str(character.get_appearances()) + "\n")
 
 def open_file_safely(fileName):
     '''
@@ -68,10 +114,10 @@ def main():
         usage_msg()
 
     # Store the input and output files before parsing
-    inputFile = open_file_safely(sys.argv[1])
-    outputFile = sys.argv[2]
+    input_file = open_file_safely(sys.argv[1])
+    output_file = sys.argv[2]
     # Call parsing to begin
-    parse_file()
+    parse_file(input_file, output_file)
 
 if __name__ == "__main__":
     main()

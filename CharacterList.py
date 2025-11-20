@@ -1,12 +1,15 @@
-import Character
+from Character import Character
 
 class CharacterList:
     def __init__(self):
         '''
             Creates a list of characters which appear in text
         '''
-        self.charcters = []
+        self.characters = []
 
+    def get_characters(self):
+        return self.characters
+    
     def get_names(self):
         '''
             Gets the names of all characters inside of the characters list
@@ -28,8 +31,8 @@ class CharacterList:
         names = self.get_names()
         if name in names:
             i = names.index(name)
-            existing_character = self.charcters[i]
-            existing_character.increment_appearance()
+            existing_character = self.characters[i]
+            existing_character.increment_appearances()
         else:
             new_character = Character(name)
-            self.charcters.append(new_character)
+            self.characters.append(new_character)
