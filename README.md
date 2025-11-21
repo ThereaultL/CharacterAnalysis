@@ -35,3 +35,5 @@ python src/CharacterAnalyzer.py <input_filepath> <output_filepath>
   - Characters names
   - Occurances of characters in text
   - Characters Catchphrase
+## License
+MIT
