@@ -1,11 +1,6 @@
 import sys
+import re
 from CharacterList import CharacterList
-# spaCy must be installed on device
-'''
-pip install -U pip setuptools wheel
-pip install -U spacy
-python -m spacy download en_core_web_sm
-'''
 import spacy
 
 nlp = spacy.load("en_core_web_sm")
@@ -52,7 +47,8 @@ def parse_paragraph(characters, paragraph):
     if(quotes):
         name = find_character(text)
         for segment in quotes:
-            sentence = seperate_text(segment, " ")
+            sentence = re.findall(r'[^?.!;:,\-\s]+', segment)
+            print(sentence)
             remove_common_words(sentence)
             characters.add_sentence(name, sentence)
 
