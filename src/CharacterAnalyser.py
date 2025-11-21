@@ -147,9 +147,12 @@ def write_to_file(output_file, characters):
     '''
     characters = characters.get_characters()
     with open(output_file, "w") as f:
+        f.write("Character Analysis\n--------------------\n\n")
         for character in characters:
-            f.write(character.get_name() + " : " + str(character.get_appearances()) + " : " 
-                    + character.get_catchphrase() + "\n")
+            f.write("Character Name: " + character.get_name() + "\n" + character.get_name() 
+                    + "'s Appearances in Text: " +str(character.get_appearances()) + "\n" 
+                    + character.get_name() + "'s Catchphrase: " +character.get_catchphrase() 
+                    + "\n\n")
 
 def open_file_safely(fileName):
     '''

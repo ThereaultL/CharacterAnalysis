@@ -1,2 +1,11 @@
-Mary : 2 : How
-Bella : 3 : Oh,
+Character Analysis
+--------------------
+
+Character Name: Mary
+Mary's Appearances in Text: 2
+Mary's Catchphrase: How
+
+Character Name: Bella
+Bella's Appearances in Text: 3
+Bella's Catchphrase: Oh
+
