@@ -53,7 +53,19 @@ def parse_paragraph(characters, paragraph):
         name = find_character(text)
         for segment in quotes:
             sentence = seperate_text(segment, " ")
+            remove_common_words(sentence)
             characters.add_sentence(name, sentence)
+
+def remove_common_words(arr):
+    remove = common_words()
+    for word in arr:
+        if word in remove:
+            arr.remove(word)
+
+
+def common_words():
+    return ["the", "I", "and", "a", "an", "on", "you", "in", "they", "they're", "there", "their", 
+            "she", "her", "he", "him"]
 
 def find_character(text_list):
     '''
