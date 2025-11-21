@@ -1,2 +1,2 @@
 # CharacterAnalysis
-Given a text file, this program will parse through the file, determine what characters exist as well as their frequency mentioned in the text
+This program analyzes a text file to identify all character names mentioned in the text and counts how many times each one appears. It also detects dialogue by iterating through the file and applying simple speech-pattern rules. Using English grammar cues, the program infers which character is speaking in each line of dialogue. For every character who speaks, the program extracts a “catchphrase” by determining the most frequently used word in their speech, excluding pronouns, articles, and prepositions.
